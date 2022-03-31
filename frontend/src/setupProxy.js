@@ -4,8 +4,8 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "https://proshop-backend115.herokuapp.com",
-      //   target: "http://localhost:5000/api/",
+      //target: "https://proshop-backend115.herokuapp.com",
+      target: "http://localhost:5000/api/",
       changeOrigin: true,
     })
   );
