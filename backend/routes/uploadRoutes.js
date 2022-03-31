@@ -36,7 +36,7 @@ const upload = multer({
 
 router.post("/", upload.single("image"), (req, res) => {
   // res.send(`http://localhost:5000/${req.file.path}`);
-  res.send(`https://proshop-backend115.herokuapp.com/${req.file.path}`);
+  res.send(`https://proshopapp115.herokuapp.com/${req.file.path}`);
 });
 
 export default router;
