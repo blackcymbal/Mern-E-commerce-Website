@@ -7,7 +7,13 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
 import { listProductDetails, updateProduct } from "../actions/productActions";
-import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
+import {
+  PRODUCT_DETAILS_REQUEST,
+  PRODUCT_DETAILS_SUCCESS,
+  PRODUCT_UPDATE_RESET,
+} from "../constants/productConstants";
+import styled from "styled-components";
+import { FaCheck } from "react-icons/fa";
 
 const ProductEditScreen = (location) => {
   const { id } = useParams();
@@ -20,6 +26,11 @@ const ProductEditScreen = (location) => {
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [shipping, setShipping] = useState();
+  const [colors, setColors] = useState([]);
+  const [color1, setColor1] = useState("");
+  const [color2, setColor2] = useState("");
+  const [color3, setColor3] = useState("");
 
   const dispatch = useDispatch();
 
@@ -38,7 +49,9 @@ const ProductEditScreen = (location) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
-      navigate("/admin/productlist");
+      dispatch(listProductDetails(id));
+
+      //  navigate("/admin/productlist");
     } else {
       if (!product.name || product._id !== id) {
         dispatch(listProductDetails(id));
@@ -50,6 +63,11 @@ const ProductEditScreen = (location) => {
         setCategory(product.category);
         setCountInStock(product.countInStock);
         setDescription(product.description);
+        setShipping(product.shipping);
+        setColors(product.colors);
+        setColor1(product.colors[0]);
+        setColor2(product.colors[1]);
+        setColor3(product.colors[2]);
       }
     }
   }, [product, dispatch, id, navigate, successUpdate]);
@@ -77,6 +95,18 @@ const ProductEditScreen = (location) => {
     }
   };
 
+  const options = [
+    "#000000",
+    "#0000FF",
+    "#FF0000",
+    "#FFFF00",
+    "#008000",
+    "#800080",
+    "#FFA500",
+  ];
+
+  console.log(color1, color2, color3);
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
@@ -89,6 +119,8 @@ const ProductEditScreen = (location) => {
         category,
         description,
         countInStock,
+        shipping,
+        colors: [color1, color2, color3],
       })
     );
   };
@@ -188,6 +220,96 @@ const ProductEditScreen = (location) => {
               ></Form.Control>
             </Form.Group>
 
+            <Form.Group controlId='shipping'>
+              <Form.Label>Free Shipping?</Form.Label>
+              <div className='form-control'>
+                <label htmlFor='shipping'>Free Shipping </label>
+                <input
+                  type='checkbox'
+                  name='shipping'
+                  id='shipping'
+                  onChange={(e) => {
+                    setShipping(e.target.checked);
+                  }}
+                  checked={shipping}
+                />
+              </div>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Choose colors</Form.Label>
+
+              <div className='form-control'>
+                <Wrapper>
+                  {/* color1 */}
+                  <div className='colors'>
+                    {options.map((c, index) => {
+                      return (
+                        <button
+                          key={index}
+                          name='color'
+                          style={{ background: c }}
+                          className={`${
+                            color1 === c ? "color-btn active" : "color-btn"
+                          }`}
+                          data-color={c}
+                          onClick={(e) => {
+                            setColor1(e.target.dataset.color);
+                          }}
+                        >
+                          {color1 === c ? <FaCheck /> : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {/* color2 */}
+                  <div className='colors'>
+                    {options.map((c, index) => {
+                      return (
+                        <button
+                          key={index}
+                          name='color'
+                          style={{ background: c }}
+                          className={`${
+                            color2 === c ? "color-btn active" : "color-btn"
+                          }`}
+                          data-color={c}
+                          onClick={(e) => {
+                            setColor2(e.target.dataset.color);
+                          }}
+                        >
+                          {color2 === c ? <FaCheck /> : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {/* color3 */}
+                  <div className='colors'>
+                    {options.map((c, index) => {
+                      return (
+                        <button
+                          key={index}
+                          name='color'
+                          style={{ background: c }}
+                          className={`${
+                            color3 === c ? "color-btn active" : "color-btn"
+                          }`}
+                          data-color={c}
+                          onClick={(e) => {
+                            setColor3(e.target.dataset.color);
+                          }}
+                        >
+                          {color3 === c ? <FaCheck /> : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </Wrapper>
+              </div>
+            </Form.Group>
+            <Form.Group controlId='colors'>
+              <Form.Label> </Form.Label>
+            </Form.Group>
+
             <Button type='submit' variant='primary'>
               Update
             </Button>
@@ -197,5 +319,116 @@ const ProductEditScreen = (location) => {
     </>
   );
 };
+
+const Wrapper = styled.section`
+  .form-control {
+    background: transparent;
+    margin-bottom: 1.25rem;
+    h5 {
+      margin-bottom: 0.5rem;
+    }
+  }
+  .search-input {
+    padding: 0.5rem;
+    background: var(--clr-grey-10);
+    border-radius: var(--radius);
+    border-color: transparent;
+    letter-spacing: var(--spacing);
+  }
+  .search-input::placeholder {
+    text-transform: capitalize;
+  }
+
+  button {
+    display: block;
+    margin: 0.25em 0;
+    padding: 0.25rem 0;
+    text-transform: capitalize;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    letter-spacing: var(--spacing);
+    color: var(--clr-grey-5);
+    cursor: pointer;
+  }
+  .active {
+    border-color: grey;
+  }
+  .brand {
+    background: var(--clr-grey-10);
+    border-radius: var(--radius);
+    border-color: transparent;
+    padding: 0.25rem;
+  }
+  .colors {
+    display: flex;
+    align-items: center;
+  }
+  .color-btn {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: #222;
+    margin-right: 0.5rem;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      font-size: 0.5rem;
+      color: var(--clr-white);
+    }
+  }
+  .all-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+    opacity: 0.5;
+  }
+  .active {
+    opacity: 1;
+  }
+  .all-btn .active {
+    text-decoration: underline;
+  }
+  .price {
+    margin-bottom: 0.25rem;
+  }
+  .shipping {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    text-transform: capitalize;
+    column-gap: 1rem;
+    font-size: 1rem;
+  }
+  .clear-btn {
+    background: darkred;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+  }
+  @media (min-width: 768px) {
+    .content {
+      position: sticky;
+      top: 1rem;
+    }
+  }
+
+  .button1 {
+    color: palevioletred;
+    border: 2px solid palevioletred;
+    background: white;
+
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border-radius: 3px;
+  }
+`;
 
 export default ProductEditScreen;

@@ -110,14 +110,16 @@ const CartScreen = () => {
                 .toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
-              <Button
-                type='button'
-                className='btn-block'
-                disabled={cartItems.length === 0}
-                onClick={checkoutHandler}
-              >
-                Proceed To Checkout
-              </Button>
+              <div className='d-grid gap-2'>
+                <Button
+                  variant='dark'
+                  size='sm'
+                  disabled={cartItems.length === 0}
+                  onClick={checkoutHandler}
+                >
+                  Proceed To Checkout
+                </Button>
+              </div>
             </ListGroup.Item>
           </ListGroup>
         </Card>

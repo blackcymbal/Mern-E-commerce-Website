@@ -99,7 +99,7 @@ const ProductScreen = ({ match }) => {
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+                <ListGroup.Item>Price: &#2547; {product.price}</ListGroup.Item>
                 <ListGroup.Item>
                   Description: {product.description}
                 </ListGroup.Item>
@@ -112,7 +112,7 @@ const ProductScreen = ({ match }) => {
                     <Row>
                       <Col>Price:</Col>
                       <Col>
-                        <strong>${product.price}</strong>
+                        <strong>&#2547; {product.price}</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -147,14 +147,16 @@ const ProductScreen = ({ match }) => {
                     </ListGroup.Item>
                   )}
                   <ListGroup.Item>
-                    <Button
-                      onClick={addToCartHandler}
-                      className='btn-block'
-                      type='button'
-                      disabled={product.countInStock === 0}
-                    >
-                      Add To Cart
-                    </Button>
+                    <div className='d-grid gap-2'>
+                      <Button
+                        variant='dark'
+                        size='sm'
+                        onClick={addToCartHandler}
+                        disabled={product.countInStock === 0}
+                      >
+                        Add To Cart
+                      </Button>
+                    </div>
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
@@ -210,13 +212,17 @@ const ProductScreen = ({ match }) => {
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </Form.Group>
-                      <Button
-                        disabled={loadingProductReview}
-                        type='submit'
-                        variant='primary'
-                      >
-                        Submit
-                      </Button>
+                      <p></p>
+                      <div className='d-grid gap-2'>
+                        <Button
+                          disabled={loadingProductReview}
+                          type='submit'
+                          variant='dark'
+                          size='sm'
+                        >
+                          Submit
+                        </Button>
+                      </div>
                     </Form>
                   ) : (
                     <Message>

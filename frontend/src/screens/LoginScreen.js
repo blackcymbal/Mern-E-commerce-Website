@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -21,19 +20,23 @@ const LoginScreen = () => {
   const currentURL = window.location.href;
 
   const redirect =
-    currentURL === "http://localhost:3000/login"
-      ? ""
+    // currentURL === "http://localhost:3000/login"
+    currentURL === "https://proshopapp115.herokuapp.com/login"
+      ? "/"
       : currentURL.split("=")[1]; // modified
-
-  console.log(redirect);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (userInfo) {
-      navigate(`/${redirect}`);
+      //  if (currentURL === "http://localhost:3000/login") {
+      if (currentURL === "https://proshopapp115.herokuapp.com/login") {
+        navigate(`/`);
+      } else {
+        navigate(`/${redirect}`);
+      }
     }
-  }, [navigate, userInfo, redirect]);
+  }, [navigate, userInfo, redirect, currentURL]);
 
   const submitHandler = (e) => {
     e.preventDefault();

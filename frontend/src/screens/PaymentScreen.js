@@ -58,9 +58,11 @@ const PaymentScreen = ({ history }) => {
           </Col>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>
-          Continue
-        </Button>
+        <div className='d-grid gap-2'>
+          <Button type='submit' variant='dark' size='sm'>
+            Continue
+          </Button>
+        </div>
       </Form>
     </FormContainer>
   );

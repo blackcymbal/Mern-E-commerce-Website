@@ -12,8 +12,8 @@ code {
     monospace;
 }
 
-main {
-  min-height: 80vh;
+.main {
+  min-height: 100vh;
 }
 
 h3 {
@@ -56,4 +56,69 @@ h2 {
 }
 .carousel a {
   margin: 0 auto;
+}
+
+.btn-container {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+}
+.btn-container1 {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.filter-btn {
+  background: transparent;
+  border-color: transparent;
+  font-size: 1rem;
+  text-transform: capitalize;
+  margin: 0 0.5rem;
+  letter-spacing: 1px;
+  padding: 0.375rem 0.75rem;
+  color: var(--clr-gold);
+  cursor: pointer;
+  transition: var(--transition);
+  border-radius: var(--radius);
+}
+
+.btn {
+  font-size: 16px;
+  letter-spacing: 2px;
+  font-weight: 400 !important;
+  background-color: #e63946ff;
+  color: #fff;
+  padding: 23px 50px;
+  margin: auto;
+  text-align: center;
+  display: inline-block !important;
+  text-decoration: none;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.loaderWrapper {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.loaderBox {
+  margin: 16px;
+  padding: 8px;
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: white;
+  text-align: center;
+}
+
+.loaderBox span {
+  margin: 8px;
+  display: block-inline;
 }

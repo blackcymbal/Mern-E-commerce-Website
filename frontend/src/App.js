@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
+import AllProductsScreen from "./screens/AllProductsScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
@@ -29,6 +30,19 @@ const App = () => {
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
+            <Route
+              path='/products/search/:keyword'
+              element={<AllProductsScreen />}
+            />
+            <Route
+              path='/products/search/:keyword/page/:pageNumber'
+              element={<AllProductsScreen />}
+            />
+            <Route
+              path='/products/page/:pageNumber'
+              element={<AllProductsScreen />}
+            />
+            <Route path='/products' element={<AllProductsScreen />} />
             <Route path='/products/:id' element={<ProductScreen />} />
             <Route path='/cart/:id' element={<CartScreen />} />
             <Route path='/cart' element={<CartScreen />} />
@@ -53,7 +67,11 @@ const App = () => {
               path='/admin/product/:id/edit'
               element={<ProductEditScreen />}
             />
-            <Route path='/search/:keyword' element={<HomeScreen />} exact />
+            <Route
+              path='/search/:keyword'
+              element={<AllProductsScreen />}
+              exact
+            />
             <Route
               path='/search/:keyword/page/:pageNumber'
               element={<HomeScreen />}

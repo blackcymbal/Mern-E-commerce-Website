@@ -157,7 +157,7 @@ h4 {
 }
 .h5,
 h5 {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 .h6,
 h6 {
@@ -6922,6 +6922,7 @@ fieldset:disabled .btn {
 }
 .me-2 {
   margin-right: 0.5rem !important;
+  width: 500px;
 }
 .me-3 {
   margin-right: 1rem !important;
@@ -10252,7 +10253,7 @@ h3,
 h4,
 h5,
 h6 {
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 3px;
 }
 .text-secondary {

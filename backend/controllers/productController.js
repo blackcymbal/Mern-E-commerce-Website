@@ -1,12 +1,12 @@
 import asyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 
-// @desc Fetch All products
+// @desc Fetch All products by page
 // @route GET /api/products
 // @access Public
 
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 3;
+  const pageSize = 9;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
@@ -24,6 +24,16 @@ const getProducts = asyncHandler(async (req, res) => {
     .skip(pageSize * (page - 1));
 
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
+});
+
+// @desc Fetch All products
+// @route GET /api/allproducts
+// @access Public
+
+const getAllProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({});
+
+  res.json(products);
 });
 
 // @desc Fetch single product
@@ -69,6 +79,8 @@ const createProduct = asyncHandler(async (req, res) => {
     countInStock: 0,
     numReviews: 0,
     description: "Sample desceription",
+    shipping: false,
+    colors: ["#000", "#00ff00", "#0000ff"],
   });
 
   const createdProduct = await product.save();
@@ -79,8 +91,17 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route PUT /api/products/:id
 // @access Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, price, description, image, brand, category, countInStock } =
-    req.body;
+  const {
+    name,
+    price,
+    description,
+    image,
+    brand,
+    category,
+    countInStock,
+    shipping,
+    colors,
+  } = req.body;
 
   const product = await Product.findById(req.params.id);
 
@@ -92,6 +113,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.brand = brand;
     product.category = category;
     product.countInStock = countInStock;
+    product.shipping = shipping;
+    product.colors = colors;
 
     const updatedProduct = await product.save();
     res.status(201).json(updatedProduct);
@@ -152,6 +175,7 @@ const getTopProducts = asyncHandler(async (req, res) => {
 
 export {
   getProducts,
+  getAllProducts,
   getProductById,
   deleteProduct,
   createProduct,

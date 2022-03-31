@@ -7,7 +7,7 @@ import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveShippingAddress } from "../actions/cartActions";
 
-const ShippingScreen = ({ history }) => {
+const ShippingScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
@@ -74,10 +74,12 @@ const ShippingScreen = ({ history }) => {
             onChange={(e) => setCountry(e.target.value)}
           ></Form.Control>
         </Form.Group>
-
-        <Button type='submit' variant='primary'>
-          Continue
-        </Button>
+        <p></p>
+        <div className='d-grid gap-2'>
+          <Button type='submit' variant='dark' size='sm'>
+            Continue
+          </Button>
+        </div>
       </Form>
     </FormContainer>
   );

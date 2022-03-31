@@ -101,10 +101,12 @@ const ProfileScreen = (location) => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
-
-          <Button type='submit' variant='primary'>
-            Update
-          </Button>
+          <p> </p>
+          <div className='d-grid gap-2'>
+            <Button type='submit' variant='dark' size='sm'>
+              Update
+            </Button>
+          </div>
         </Form>
       </Col>
       <Col md={9}>
