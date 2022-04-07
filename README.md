@@ -36,7 +36,7 @@ Some basic Git commands are:
 
 ```
 $ git clone https://github.com/blackcymbal/Mern-E-commerce-Website
-$ cd project
+$ cd Mern-E-commerce-Website
 $ npm install
 ```
 ## Setup 
