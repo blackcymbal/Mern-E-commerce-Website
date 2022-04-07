@@ -2,7 +2,7 @@
 
 ## Description
 
-An ecommerce store built with MERN stack, and utilizes third party API's. This ecommerce store enable three main different flows or implementations:
+An E-commerce store built with MERN stack, and utilizes third party API's. This ecommerce store enable three main different flows or implementations:
 
 1. Buyers browse the store by categories, products, brands, colors and price range
 2. Buyers can also view the products by gird view or list view
